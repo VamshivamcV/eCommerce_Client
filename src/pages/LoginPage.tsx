@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/slices/authSlice";
 import { loadCartFromDB } from "../redux/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import { getAuthHeaders } from "../utils/authHeaders";
 import { saveShippingAddress } from "../redux/slices/orderSlice";
-import { RootState } from "../redux/store";
 
 const LoginPage: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,13 +18,13 @@ const LoginPage: React.FC = () => {
     const url = process.env.REACT_APP_API_URL;
 
     const URL = process.env.REACT_APP_API_URL;
-
-    const userInfo = useSelector((state: RootState) => state.auth.userInfo);
   
-    useEffect(() => {
-    
-    }, [userInfo]);
 
+    const fetchProfile = async () => {
+        const { data } = await axios.get(`${URL}/users/profile`, getAuthHeaders());
+        dispatch(saveShippingAddress(data.shippingAddress));
+        console.log(data.shippingAddress);
+    };
 
     const submitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,11 +35,7 @@ const LoginPage: React.FC = () => {
             });
             dispatch(loginSuccess(data));
 
-            const fetchProfile = async () => {
-                const { data } = await axios.get(`${URL}/users/profile`, getAuthHeaders());
-                if(data.shippingAddress){dispatch(saveShippingAddress(data.shippingAddress));}
-            };
-            if (userInfo) fetchProfile();
+            fetchProfile();
 
             const { data: savedCart } = await axios.get(`${url}/users/cart`, getAuthHeaders());
             dispatch(loadCartFromDB(savedCart));

@@ -8,6 +8,7 @@ import { getAuthHeaders } from "../utils/authHeaders";
 import { clearShippingAddress } from "../redux/slices/orderSlice";
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useState } from "react";
+import CartIconWithBadge from './CartIcon';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +16,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state: RootState) => state.cart);
+
+  const totalQty = cartItems.reduce((acc, item)=> acc + item.qty, 0) 
 
   const url = process.env.REACT_APP_API_URL;
 
@@ -53,17 +56,18 @@ const Navbar = () => {
         ShopToday
       </Link>
 
-      <button className="md:hidden" onClick={toggleMenu}>
-        {isMenuOpen ? <XMarkIcon className="size-6" /> : <Bars3Icon className="size-6"/>}
-      </button>
 
-      <div className="hidden md:flex gap-4 items-center">
+      <div className="flex gap-4 items-center">
         <Link to="/cart"
                 className="group transition duration-300 rounded"
-            >Cart
+            ><CartIconWithBadge count={totalQty} color="bg-white text-gray-800" />
               <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
         </Link>
 
+      <button className="md:hidden" onClick={toggleMenu}>
+        {isMenuOpen ? <XMarkIcon className="size-6" /> : <Bars3Icon className="size-6"/>}
+      </button>
+        <div className="hidden md:flex gap-4 items-center">
         {userInfo ? (
           <>
             <Link to="/my-orders" 
@@ -101,12 +105,14 @@ const Navbar = () => {
         )}
       </div>
       </div>
+      </div>
 
+      
       <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden absolute top-full left-0 w-full bg-gray-100 shadow-lg z-10 flex flex-col items-center py-4 space-y-4 rounded-xl` }>
-        <Link to="/cart" onClick={closeMenu} className="group transition duration-300 rounded-xl shadow px-20 bg-white">
-          Cart
+        {/* <Link to="/cart" onClick={closeMenu} className="group transition duration-300 rounded-xl shadow px-20 bg-white">
+          <CartIconWithBadge count={totalQty} color="bg-white text-gray-800" />
           <span className="block max-w-0 group-hover:max-w-full trasnsition-all duration-500 h-0.5 bg-sky-600"></span>
-        </Link>
+        </Link> */}
 
         {userInfo ? (
           <>
