@@ -4,6 +4,7 @@ import { Product } from '../types/Product';
 import { AppDispatch } from '../redux/store';
 import { addToCart, } from '../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface Props {
   product: Product;
@@ -31,7 +32,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
         <Link to={`/product/${product._id}`}>
-        <img
+        <LazyLoadImage
           src={product.image}
           alt={product.title}
           className="w-full h-48 object-cover rounded mb-4"
@@ -51,3 +52,4 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 };
 
 export default ProductCard;
+React.memo(ProductCard);

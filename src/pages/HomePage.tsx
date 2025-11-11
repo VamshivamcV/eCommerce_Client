@@ -1,48 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/Product';
 import ProductCard from '../components/ProductCard';
 import Navbar from '../components/NavBar';
+import { getProducts } from '../api/products';
+import ProductsSkeleton from '../components/ProductsSkeleton';
 
 
 const HomePage: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
-  const URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get<Product[]>(`${URL}/products`);
-        setProducts(res.data);
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
-        setError('Error loading products');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {data, isLoading, error} = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: getProducts,
+    staleTime:1000 * 60, // cache for 1 min
+  });
 
-    fetchProducts();
-  }, []);
-
-  if (loading) {
+  // Handle loading and error states separately, allowing them 
+  // to take up the full page width outside of the main products grid container.
+  if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-xl text-gray-500">Loading products...</p>
+      <div className="min-h-screen bg-gray-100 p-6">
+        <Navbar/>
+        <h1 className="text-3xl font-bold text-center mb-6">All Products</h1>
+        {/* ProductsSkeleton renders its own full-width grid here */}
+        <ProductsSkeleton/>
       </div>
     );
   }
-  if (error) return <div className="text-red-500 text-center mt-10">{error}</div>;
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-6">
+        <Navbar/>
+        <h1 className="text-3xl font-bold text-center mb-6">All Products</h1>
+        <div className="text-red-500 text-center mt-10">Failed to load products</div>;
+      </div>
+    );
+  }
 
+  // Once data is successfully loaded, render the final product grid
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <Navbar/>
       <h1 className="text-3xl font-bold text-center mb-6">All Products</h1>
+      
+      {/* The main product grid when data is present */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
+        {/* data is guaranteed to exist here due to the checks above */}
+        {data!.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
