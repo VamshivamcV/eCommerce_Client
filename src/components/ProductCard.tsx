@@ -39,7 +39,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         />
         <h2 className="text-lg font-semibold">{product.title}</h2>
         <p className="text-sm text-gray-500 mb-1">{product.brand}</p>
-        <p className="text-xl font-bold text-green-600 mb-1">₹{product.price}</p>
+        <p className="text-xl font-bold text-green-600 mb-1">${product.price}</p>
         <p className="text-yellow-500 text-sm mb-2">⭐ {product.rating}/5</p>
         </Link>
         <button
