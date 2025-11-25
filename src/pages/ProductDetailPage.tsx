@@ -54,7 +54,7 @@ const ProductDetailPage: React.FC = () => {
     }
 
     return (
-        <div className='p-6 max-w-4xl mx-auto'>
+        <div className='min-h-screen bg-gray-100 p-6'>
             <Navbar/>
             <div className='flex flex-col md:flex-row gap-6 shadow-xl my-10 py-10 rounded md:pl-10 h-140'>
                 <img src={product.image} alt={product.title} className='w-full md:w-1/2 bg-white rounded-xl' />
