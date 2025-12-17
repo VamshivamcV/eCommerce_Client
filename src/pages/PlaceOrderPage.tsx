@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import api from "../api/axios";
 import { getAuthHeaders } from "../utils/authHeaders";
 import { RootState } from "../redux/store";
 
@@ -18,13 +18,13 @@ const PlaceOrderPage: React.FC = () => {
         price: item.price,
     }));
 
-    const url = process.env.REACT_APP_API_URL;
+    // const url = process.env.REACT_APP_API_URL;
 
 
     const placeOrderHandler = async () => {
         try {
-            const { data } = await axios.post(
-                `${url}/payments/create-checkout-session`,
+            const { data } = await api.post(
+                "/payments/create-checkout-session",
                 {
                     orderItems,
                     shippingAddress,

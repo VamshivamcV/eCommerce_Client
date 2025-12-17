@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { getAuthHeaders } from "../utils/authHeaders";
 import { useSelector, useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/slices/authSlice";
@@ -28,24 +28,30 @@ const ProfilePage: React.FC = () => {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
 
-  const url = process.env.REACT_APP_API_URL;
+  // const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const { data } = await axios.get(
-        `${url}/users/profile`,
-        getAuthHeaders()
-      );
-      setName(data.name);
-      setEmail(data.email);
-
-      if (data.shippingAddress){
-        setShipName(data.shippingAddress.name || "");
-        setAddress(data.shippingAddress.address || "");
-        setCity(data.shippingAddress.city || "");
-        setPostalCode(data.shippingAddress.postalCode || "");
-        setCountry(data.shippingAddress.country || "");
-      } 
+      try {
+        const { data } = await api.get(
+          "/users/profile",
+          getAuthHeaders()
+        );
+        setName(data.name);
+        setEmail(data.email);
+  
+        if (data.shippingAddress){
+          setShipName(data.shippingAddress.name || "");
+          setAddress(data.shippingAddress.address || "");
+          setCity(data.shippingAddress.city || "");
+          setPostalCode(data.shippingAddress.postalCode || "");
+          setCountry(data.shippingAddress.country || "");
+        } 
+      } catch (error: any) {
+        if (error?.response?.status !== 401){
+          console.error(error);
+        }
+      }
     };
     fetchProfile();
   });
@@ -62,16 +68,17 @@ const ProfilePage: React.FC = () => {
     }
 
     try {
-      const { data } = await axios.put(
-        `${url}/users/profile`,
+      const { data } = await api.put(
+        "/users/profile",
         { name, email, password, shippingAddress },
         getAuthHeaders()
       );
       dispatch(loginSuccess(data));
       dispatch(saveShippingAddress(shippingAddress));
       alert("Profile updated!");
-    } catch (err) {
-      alert("Updated failed");
+    } catch (err: any) {
+      if(err?.response?.status !== 401){
+      alert("Updated failed");}
     }
   };
 

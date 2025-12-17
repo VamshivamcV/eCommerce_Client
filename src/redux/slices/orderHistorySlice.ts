@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../api/axios";
 import { getAuthHeaders } from "../../utils/authHeaders";
 
 interface orderHistoryState {
@@ -14,11 +14,11 @@ const initialState: orderHistoryState = {
     error: null,
 };
 
-const url = process.env.REACT_APP_API_URL;
+// const url = process.env.REACT_APP_API_URL;
 
 
 export const fetchMyOrders = createAsyncThunk('orders/fetchMyOrders', async () => {
-    const { data } = await axios.get(`${url}/orders/myorders`, getAuthHeaders());
+    const { data } = await api.get("/orders/myorders", getAuthHeaders());
     return data;
 });
 
