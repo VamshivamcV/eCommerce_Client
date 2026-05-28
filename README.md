@@ -1,47 +1,127 @@
-# Getting Started with Create React App
+# 🛒 ShopNow — Full Stack E-Commerce Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A production-ready full-stack e-commerce web application built with the MERN stack, TypeScript, and modern React architecture. Features a complete shopping experience including product browsing, cart management, user authentication, and order flow.
 
-## Available Scripts
+**Live Demo → [vamshidev-ecommerce.vercel.app](https://vamshidev-ecommerce.vercel.app)**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
+- 🔐 **User Authentication** — JWT-based register, login, and protected routes
+- 🛍️ **Product Catalogue** — Browse, search, and filter products
+- 🛒 **Cart Management** — Add, remove, and update quantities with persistent state
+- 📦 **Order Flow** — Complete checkout and order placement
+- 📱 **Responsive Design** — Fully mobile-friendly UI with Tailwind CSS
+- ⚡ **Performance Optimised** — Lazy loading, code splitting, and API response caching
+- 🌙 **Clean UI** — Component-based design system with reusable components
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+| Technology | Purpose |
+|---|---|
+| React 19 + TypeScript | UI framework with type safety |
+| Redux Toolkit | Global state management (cart, auth) |
+| TanStack React Query | Server state, API caching, background sync |
+| React Router DOM | Client-side routing and navigation |
+| Tailwind CSS | Utility-first responsive styling |
+| Axios | HTTP client for API integration |
+
+### Backend
+| Technology | Purpose |
+|---|---|
+| Node.js + Express.js | REST API server |
+| MongoDB + Mongoose | Database and ODM |
+| JWT | Secure authentication |
+| bcrypt | Password hashing |
+
+### Deployment
+| Service | Purpose |
+|---|---|
+| Vercel | Frontend deployment |
+| Render | Backend deployment |
+
+---
+
+## 🏗️ Architecture
+
+```
+eCommerce_Client/
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── pages/             # Route-level page components
+│   ├── store/             # Redux Toolkit slices and store
+│   ├── hooks/             # Custom React hooks
+│   ├── services/          # Axios API service layer
+│   ├── types/             # TypeScript interfaces and types
+│   └── utils/             # Helper functions
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/VamshivamcV/eCommerce_Client.git
+cd eCommerce_Client
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+# Add your backend API URL to .env
+# REACT_APP_API_URL=your_backend_url
+
+# Start development server
+npm start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🔑 Key Implementation Highlights
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**State Management Strategy**
+- Client state (cart, UI) managed with Redux Toolkit
+- Server state (products, orders) managed with TanStack React Query
+- Eliminates redundant API calls through intelligent caching
 
-### `npm run build`
+**Performance Optimisations**
+- React.lazy() and Suspense for route-based code splitting
+- React Query cache prevents duplicate network requests
+- Memoised components to avoid unnecessary re-renders
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Type Safety**
+- Full TypeScript coverage across components, API responses, and Redux state
+- Custom type definitions for all data models
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🌐 Backend Repository
 
-### `npm run eject`
+The backend API is in a separate repository:
+👉 [eCommerce Server](https://github.com/VamshivamcV/eCommerce_Server) *(add your backend repo link here)*
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📬 Connect with Me
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 💼 [LinkedIn](https://www.linkedin.com/in/vamshivuppunutula/)
+- 🌐 [Portfolio](https://vamshidev.vercel.app/)
+- 📧 vamshidev254@gmail.com
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# eCommerce_Client
+*Built by Vamshi Vuppunutula — Full Stack Developer*
