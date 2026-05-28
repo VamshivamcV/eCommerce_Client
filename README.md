@@ -1,3 +1,8 @@
+<img width="1270" height="714" alt="ecom1" src="https://github.com/user-attachments/assets/31880d01-941e-48de-a966-a9b3622c59b7" />
+<img width="1275" height="713" alt="ecom2" src="https://github.com/user-attachments/assets/586afbf1-4a91-4323-a6b8-17a0a2fed080" />
+<img width="1273" height="714" alt="ecom3" src="https://github.com/user-attachments/assets/3af592e7-8848-42e8-9708-8e6d7bf8ed00" />
+<img width="1265" height="711" alt="ecom4" src="https://github.com/user-attachments/assets/3eb7959d-b54c-4ef7-ab29-cc7ec19a3ebd" />
+
 # 🛒 ShopNow — Full Stack E-Commerce Application
 
 A production-ready full-stack e-commerce web application built with the MERN stack, TypeScript, and modern React architecture. Features a complete shopping experience including product browsing, cart management, user authentication, and order flow.
